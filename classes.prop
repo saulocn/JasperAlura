@@ -1,0 +1,3 @@
+java.util.Map = java.util.HashMap
+java.util.List = java.util.ArrayList
+br.com.caelum.reflection.InterfaceExemplo = br.com.caelum.reflection.ClasseExemplo

@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report4_subreport1" language="java" pageWidth="572" pageHeight="752" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="7d30d146-e3ba-449d-b108-5dc8505e9542">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[SELECT
+     inst_unidade."unid_sigla" AS UNIDADE,
+     inst_funcao."func_nome" AS FUNÇÃO,
+     inst_pessoa."pess_nome" AS AUTORIDADE
+FROM
+     "nucleo"."inst_unidade" inst_unidade
+     left JOIN "nucleo"."inst_autoridade" inst_autoridade ON inst_unidade."unid_id" = inst_autoridade."unid_id"
+     left JOIN  "nucleo"."inst_funcao" ON inst_autoridade."func_id" = inst_funcao."func_id"
+     left JOIN  "gestaopessoas"."inst_pessoa" ON inst_autoridade."pess_id" = inst_pessoa."pess_id"
+WHERE
+     inst_unidade."unid_dtinicio" < NOW()
+ AND (inst_unidade."unid_dtfim" > NOW()
+     or inst_unidade."unid_dtfim" IS null)
+     and inst_autoridade."auto_dtinicio" < NOW()
+ AND (inst_autoridade."auto_dtfim" > NOW()
+     or inst_autoridade."auto_dtfim" IS null)
+ORDER BY
+     inst_autoridade.nche_id ASC,
+     inst_unidade.unid_hierarquia ASC]]>
+	</queryString>
+	<field name="unidade" class="java.lang.String"/>
+	<field name="funÇÃo" class="java.lang.String"/>
+	<field name="autoridade" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="42" splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="65" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="0" width="572" height="65" backcolor="#CCCCCC" uuid="70d985c0-ef36-4ebc-8f37-18f7353b13fb"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="141" y="2" width="291" height="60" uuid="34168bd0-8f95-4acc-837b-924fff1bc4d4"/>
+				<textElement>
+					<font size="36"/>
+				</textElement>
+				<text><![CDATA[AUTORIDADES]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="20" splitType="Stretch">
+			<staticText>
+				<reportElement x="163" y="0" width="94" height="20" uuid="bc1d0db6-6e44-451e-a7af-dc8257576bc2"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[UNIDADE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="257" y="0" width="313" height="20" uuid="a7df3b6a-0661-46c5-bd71-7ae4a92b2fb3"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[AUTORIDADE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="0" width="161" height="20" uuid="5ac17a6e-fb9b-4d64-928c-03e418d19662"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[FUNÇÃO]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement x="163" y="0" width="94" height="20" uuid="25fc5c8a-2342-4ac3-b0a0-01d6d46cde5d"/>
+				<textFieldExpression><![CDATA[$F{unidade}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="257" y="0" width="313" height="20" uuid="21bbaf2f-0ab0-4e86-85de-6e77dacf447e"/>
+				<textFieldExpression><![CDATA[$F{autoridade}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="0" width="161" height="20" uuid="0333d81e-8439-408b-ab7b-7610ddde7622"/>
+				<textFieldExpression><![CDATA[$F{funÇÃo}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="54" splitType="Stretch">
+			<textField>
+				<reportElement x="450" y="0" width="80" height="20" uuid="c8593215-3b06-4a0b-b209-6a3584f3462e"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="530" y="0" width="40" height="20" uuid="77e0dd63-1aff-4caa-b55b-9843bd757dd5"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

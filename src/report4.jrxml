@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report4" language="java" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="98d73542-a5c9-402d-8370-9e0f99f7a35d">
+	<property name="ireport.zoom" value="1.464100000000001"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="ID_UNIDADE" class="java.lang.Integer" isForPrompting="false">
+		<defaultValueExpression><![CDATA[new Integer(2)]]></defaultValueExpression>
+	</parameter>
+	<parameter name="DATA_INI" class="java.util.Date" isForPrompting="false">
+		<defaultValueExpression><![CDATA[new java.text.SimpleDateFormat("dd/MM/yyyy").parse("01/08/1900")]]></defaultValueExpression>
+	</parameter>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["C:\\Users\\saulo\\"]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select * from nucleo.inst_unidade
+where unid_id = $P{ID_UNIDADE}
+ order by unid_hierarquia]]>
+	</queryString>
+	<field name="unid_id" class="java.lang.Integer"/>
+	<field name="unid_sigla" class="java.lang.String"/>
+	<field name="unid_nome" class="java.lang.String">
+		<fieldDescription><![CDATA[NOME DA UNIDADE]]></fieldDescription>
+	</field>
+	<field name="unid_externa" class="java.lang.Boolean">
+		<fieldDescription><![CDATA[UNIDADE EXTERNA? TRUE / FALSE]]></fieldDescription>
+	</field>
+	<field name="unid_nomeresumido" class="java.lang.String">
+		<fieldDescription><![CDATA[NOME RESUMIDO DA UNIDADE]]></fieldDescription>
+	</field>
+	<field name="unid_nivel" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[NÍVEL DA UNIDADE]]></fieldDescription>
+	</field>
+	<field name="unid_hierarquia" class="java.lang.String">
+		<fieldDescription><![CDATA[HIERARQUIA DA UNIDADE]]></fieldDescription>
+	</field>
+	<field name="unid_pai" class="java.lang.Integer"/>
+	<field name="unid_dtinicio" class="java.sql.Date">
+		<fieldDescription><![CDATA[DATA INÍCIO DA UNIDADE]]></fieldDescription>
+	</field>
+	<field name="unid_dtfim" class="java.sql.Date">
+		<fieldDescription><![CDATA[DATA FIM DA UNIDADE]]></fieldDescription>
+	</field>
+	<field name="unid_siape" class="java.lang.String">
+		<fieldDescription><![CDATA[Unidade organizacional do inpe junto ao MCT]]></fieldDescription>
+	</field>
+	<variable name="unid_id_1" class="java.lang.Integer" resetType="Column" calculation="Sum">
+		<variableExpression><![CDATA[$F{unid_id}]]></variableExpression>
+	</variable>
+	<variable name="unid_id_2" class="java.lang.Integer" calculation="Sum">
+		<variableExpression><![CDATA[$F{unid_id}]]></variableExpression>
+	</variable>
+	<variable name="unid_id_3" class="java.lang.Integer" calculation="Sum">
+		<variableExpression><![CDATA[$F{unid_id}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="38" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="0" width="555" height="38" backcolor="#CCCCCC" uuid="c4d3b251-d9a0-482b-8e9e-e52b831d227f"/>
+				<graphicElement>
+					<pen lineWidth="0.0" lineStyle="Solid"/>
+				</graphicElement>
+			</rectangle>
+			<staticText>
+				<reportElement x="231" y="0" width="93" height="38" uuid="18997891-c44c-4ded-a315-04ffe80e4cad"/>
+				<textElement>
+					<font size="24"/>
+				</textElement>
+				<text><![CDATA[Unidade]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="20" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="100" height="20" uuid="0b95a6a0-1944-4267-a076-21b25376b4ec"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[ID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="100" y="0" width="224" height="20" uuid="81920e13-3c3b-4b2a-b3a2-48100e27048c"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[UNIDADE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="328" y="0" width="138" height="20" uuid="461ba2b8-e216-451e-a1c5-580aad1c3ab2"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[HIERARQUA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="470" y="0" width="85" height="20" uuid="5cd2003d-a348-4d17-afcd-521b8e40c222"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[INÍCIO]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="48" splitType="Stretch">
+			<textField pattern="###0.00">
+				<reportElement x="0" y="0" width="100" height="20" uuid="590fcafc-8c0d-4ad2-b6c7-b809dc936762"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{unid_id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="100" y="0" width="224" height="20" uuid="3e53e924-6ca3-4f87-9946-07a941cf3a1d"/>
+				<textFieldExpression><![CDATA[$F{unid_sigla}.toUpperCase() + " - " + $F{unid_nome}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="328" y="0" width="138" height="20" uuid="eb7a22b9-f3c4-47a2-a4f9-6cde1bcf8adf"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{unid_hierarquia}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="470" y="0" width="85" height="20" uuid="85afb05c-9808-4bb4-a380-8d780ad7cf3a"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{unid_dtinicio}]]></textFieldExpression>
+			</textField>
+			<subreport>
+				<reportElement x="0" y="30" width="555" height="18" uuid="36f1b3ed-d299-43b9-805f-f1c2b764be84"/>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "report4_subreport1.jasper"]]></subreportExpression>
+			</subreport>
+			<break>
+				<reportElement x="0" y="28" width="100" height="1" uuid="985c1963-ab2e-40cd-96cc-bdaab9848c1d"/>
+			</break>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="21" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="100" height="21" uuid="bb945217-1c25-44bc-a8ec-4d4154361969"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$V{unid_id_1}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="22" splitType="Stretch">
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="0" y="1" width="100" height="20" uuid="7c0daff3-eebf-4d23-85d2-f0e56042d94e"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="429" y="1" width="80" height="20" uuid="32755649-e2d2-4957-a4f6-ea61137bfeb8"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Página "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="509" y="1" width="40" height="20" uuid="6232fa8c-9624-4653-9856-a39962ba7630"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="227" y="1" width="100" height="20" uuid="2892f06d-24bf-4db9-aac4-1e173d0e86ee"/>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="100" height="20" uuid="d799c1eb-db7c-4fdf-ae1d-c1ad9ea863d7"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$V{unid_id_3}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>
